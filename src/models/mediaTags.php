@@ -1,6 +1,6 @@
 <?php
 
-namespace App\models;
+namespace bramato\imag\models;
 
 use Illuminate\Database\Eloquent\Model;
 

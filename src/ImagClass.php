@@ -5,14 +5,21 @@ namespace bramato\imag;
 
 
 use App\models\media;
+use App\models\mediaTags;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class ImagClass
 {
-    function save(Request $request){
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function save(Request $request){
         $request->validate([
                                'file' => 'required',
                            ]);
@@ -24,7 +31,7 @@ class ImagClass
         $return['url']=$url;
         $return['uuid']=$request->input('uuid');
         $return['tags']=$tags;
-        $media= new \App\models\media();
+        $media= new \bramato\imag\models\media();
         $media->uuidMedia=$request->input('uuid');
         $media->type='img';
         $media->idUser=Auth::id();

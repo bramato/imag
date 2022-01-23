@@ -1,9 +1,8 @@
 <?php
 
-namespace App\models;
+namespace bramato\imag\models;
 
-use App\Classes\breadcrumbs;
-use App\User;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
