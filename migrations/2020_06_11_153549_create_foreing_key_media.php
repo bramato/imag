@@ -13,13 +13,13 @@ class CreateForeingKeyMedia extends Migration
      */
     public function up()
     {
-        Schema::table('tags', function (Blueprint $table) {
+        Schema::table('imag_tags', function (Blueprint $table) {
             $table->increments('id')->change();
         });
-        Schema::table('media', function (Blueprint $table) {
+        Schema::table('imag_media', function (Blueprint $table) {
             $table->increments('id')->change();
         });
-        Schema::table('media_tags', function ($table) {
+        Schema::table('imag_media_tags', function ($table) {
             $table->foreign('idMedia')->references('id')->on('media');
             $table->foreign('idTag')->references('id')->on('tags');
         });
@@ -32,11 +32,11 @@ class CreateForeingKeyMedia extends Migration
      */
     public function down()
     {
-        Schema::table('media_tags', function($table){
+        Schema::table('imag_media_tags', function($table){
             $table->dropForeign('media_tags_idmedia_foreign');
             $table->dropForeign('media_tags_idtag_foreign');
         });
-        Schema::table('tags', function (Blueprint $table) {
+        Schema::table('imag_tags', function (Blueprint $table) {
             $table->bigIncrements('id')->change();
         });
     }

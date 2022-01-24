@@ -13,7 +13,7 @@ class CreateTags extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('imag_tags', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('tag');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateTags extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('imag_tags');
     }
 }

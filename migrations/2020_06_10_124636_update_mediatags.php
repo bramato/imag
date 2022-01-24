@@ -13,7 +13,7 @@ class UpdateMediatags extends Migration
      */
     public function up()
     {
-        Schema::table('media_tags', function($table) {
+        Schema::table('imag_media_tags', function($table) {
             $table->float('Confidence');
         });
     }
@@ -25,7 +25,7 @@ class UpdateMediatags extends Migration
      */
     public function down()
     {
-        Schema::table('media_tags', function($table) {
+        Schema::table('imag_media_tags', function($table) {
             $table->dropColumn('Confidence');
         });
     }

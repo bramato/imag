@@ -13,14 +13,14 @@ class SoftDeletesMedia extends Migration
      */
     public function up()
     {
-        Schema::table ('media', function (Blueprint $table) {
+        Schema::table ('imag_media', function (Blueprint $table) {
             $table->softDeletes ();
         });
     }
 
     public function down()
     {
-        Schema::table ('media', function (Blueprint $table) {
+        Schema::table ('imag_media', function (Blueprint $table) {
             $table->dropSoftDeletes ();
         });
     }

@@ -13,7 +13,7 @@ class CreateMedia extends Migration
      */
     public function up()
     {
-        Schema::create('media', function (Blueprint $table) {
+        Schema::create('imag_media', function (Blueprint $table) {
 
             $table->bigIncrements('id');
             $table->integer ('idUser');
@@ -31,6 +31,6 @@ class CreateMedia extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('media');
+        Schema::dropIfExists('imag_media');
     }
 }

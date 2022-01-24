@@ -14,7 +14,7 @@ class UpdateMediaVideoJobData extends Migration
     public function up()
     {
 
-        Schema::table('media', function(Blueprint $table) {
+        Schema::table('imag_media', function(Blueprint $table) {
             $table->char('awsJobId')->after('type');
         });
     }
@@ -26,7 +26,7 @@ class UpdateMediaVideoJobData extends Migration
      */
     public function down()
     {
-        Schema::table('media', function(Blueprint $table) {
+        Schema::table('imag_media', function(Blueprint $table) {
             $table->dropColumn('awsJobId');
         });
     }

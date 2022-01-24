@@ -13,7 +13,7 @@ class UpdateMediaDominio extends Migration
      */
     public function up()
     {
-        Schema::table ('media', function (Blueprint $table) {
+        Schema::table ('imag_media', function (Blueprint $table) {
             $table->bigInteger ('dominio')->after ('idUser')->nullable ();
         });
     }
@@ -25,7 +25,7 @@ class UpdateMediaDominio extends Migration
      */
     public function down()
     {
-        Schema::table ('media', function (Blueprint $table) {
+        Schema::table ('imag_media', function (Blueprint $table) {
             $table->dropColumn ('dominio');
         });
     }

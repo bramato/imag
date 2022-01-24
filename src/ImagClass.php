@@ -22,9 +22,7 @@ class ImagClass
         $request->validate([
                                'file' => 'required',
                            ]);
-
-        //$filename = str_replace('.' . $request->input('extention'), '', $request->input('newname'));
-        $url = config('services.urlPath.s3root').$request->input('file');
+        $url = config('imag.S3.root').$request->input('file');
         $tags = $this->recognize($request->input('file'));
         $return = [];
         $return['url'] = $url;
@@ -41,15 +39,8 @@ class ImagClass
             $idTag = tags::addTag($tag);
             $idMediaTag = mediaTags::addTag($idTag, $idMedia, $tag['Confidence']);
         }
-
-
-        //$json_tags=json_encode ($tags,true);
-        // $recordImage= media::saveMedia ($url,'',$json_tags,1);
-        //$return_json=json_encode ($return);
         return Response::json($return);
-        //return view ('image',compact('url','tags'));
     }
-
     public function form($id, Request $req)
     {
         App::setLocale(Auth::user()->lingua);

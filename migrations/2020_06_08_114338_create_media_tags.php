@@ -13,7 +13,7 @@ class CreateMediaTags extends Migration
      */
     public function up()
     {
-        Schema::create('media_tags', function (Blueprint $table) {
+        Schema::create('imag_media_tags', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer ('idMedia')->unsigned ();
             $table->integer('idTag')->unsigned ();
@@ -28,6 +28,6 @@ class CreateMediaTags extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('media_tags');
+        Schema::dropIfExists('imag_media_tags');
     }
 }

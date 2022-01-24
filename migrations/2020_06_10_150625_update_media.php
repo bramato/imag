@@ -13,7 +13,7 @@ class UpdateMedia extends Migration
      */
     public function up()
     {
-        Schema::table('media', function($table) {
+        Schema::table('imag_media', function($table) {
             $table->char('thumbs')->after('type');
             $table->char('med')->after('type');
             $table->char('lit')->after('type');
@@ -27,7 +27,7 @@ class UpdateMedia extends Migration
      */
     public function down()
     {
-        Schema::table('media', function($table) {
+        Schema::table('imag_media', function($table) {
             $table->dropColumn('thumbs');
             $table->dropColumn('med');
             $table->dropColumn('lit');
