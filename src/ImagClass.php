@@ -4,14 +4,13 @@ namespace bramato\imag;
 
 use bramato\imag\models\imagMediaTags;
 use bramato\imag\models\imagTags;
-use Illuminate\Support\Facades\App;
+use EddTurtle\DirectUpload\Signature;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use EddTurtle\DirectUpload\Signature;
 
 class ImagClass
 {
@@ -41,6 +40,7 @@ class ImagClass
             $idTag = imagTags::addTag($tag);
             $idMediaTag = imagMediaTags::addTag($idTag, $idMedia, $tag['Confidence']);
         }
+
         return Response::json($return);
     }
 
@@ -433,19 +433,19 @@ class ImagClass
         return $labels;
     }
 
-    protected function aws_form(){
-    $upload = new Signature(
-        config('filesystems.disks.s3.key'),
-        config ('filesystems.disks.s3.secret'),
-        config('filesystems.disks.s3.bucket'),
-        config('filesystems.disks.s3.region'),
-        ['acl' => 'public-read']
-    );
-    $url=$upload->getFormUrl();
-    $inputsHTML=$upload->getFormInputsAsHtml();
-    $inputs=$upload->getFormInputs();
+    protected function aws_form()
+    {
+        $upload = new Signature(
+            config('filesystems.disks.s3.key'),
+            config('filesystems.disks.s3.secret'),
+            config('filesystems.disks.s3.bucket'),
+            config('filesystems.disks.s3.region'),
+            ['acl' => 'public-read']
+        );
+        $url = $upload->getFormUrl();
+        $inputsHTML = $upload->getFormInputsAsHtml();
+        $inputs = $upload->getFormInputs();
 
-    return ['url'=>$url, 'inputsHTML'=>$inputsHTML, 'inputs'=>$inputs,'AWSAccessKeyId'=>config('filesystems.disks.s3.key'),'bucket'=>config('filesystems.disks.s3.bucket')];
-}
-
+        return ['url' => $url, 'inputsHTML' => $inputsHTML, 'inputs' => $inputs,'AWSAccessKeyId' => config('filesystems.disks.s3.key'),'bucket' => config('filesystems.disks.s3.bucket')];
+    }
 }
