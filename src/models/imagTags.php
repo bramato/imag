@@ -4,9 +4,9 @@ namespace bramato\imag\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class tags extends Model
+class imagTags extends Model
 {
-    protected $table = 'tags';
+    protected $table = 'imag_tags';
 
     public static function addTag($tag)
     {

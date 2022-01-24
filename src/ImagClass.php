@@ -2,14 +2,16 @@
 
 namespace bramato\imag;
 
-use App\models\media;
-use App\models\mediaTags;
+use bramato\imag\models\imagMediaTags;
+use bramato\imag\models\imagTags;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use EddTurtle\DirectUpload\Signature;
 
 class ImagClass
 {
@@ -28,7 +30,7 @@ class ImagClass
         $return['url'] = $url;
         $return['uuid'] = $request->input('uuid');
         $return['tags'] = $tags;
-        $media = new \bramato\imag\models\media();
+        $media = new imagMediaTags();
         $media->uuidMedia = $request->input('uuid');
         $media->type = 'img';
         $media->idUser = Auth::id();
@@ -36,14 +38,14 @@ class ImagClass
         $idMedia = $media->id;
         $return['idMedia'] = $idMedia;
         foreach ($tags as $tag) {
-            $idTag = tags::addTag($tag);
-            $idMediaTag = mediaTags::addTag($idTag, $idMedia, $tag['Confidence']);
+            $idTag = imagTags::addTag($tag);
+            $idMediaTag = imagMediaTags::addTag($idTag, $idMedia, $tag['Confidence']);
         }
         return Response::json($return);
     }
+
     public function form($id, Request $req)
     {
-        App::setLocale(Auth::user()->lingua);
         $search = '';
         if (strlen($req->input('search')) > 3) {
             $search = $req->input('search');
@@ -430,4 +432,20 @@ class ImagClass
 
         return $labels;
     }
+
+    protected function aws_form(){
+    $upload = new Signature(
+        config('filesystems.disks.s3.key'),
+        config ('filesystems.disks.s3.secret'),
+        config('filesystems.disks.s3.bucket'),
+        config('filesystems.disks.s3.region'),
+        ['acl' => 'public-read']
+    );
+    $url=$upload->getFormUrl();
+    $inputsHTML=$upload->getFormInputsAsHtml();
+    $inputs=$upload->getFormInputs();
+
+    return ['url'=>$url, 'inputsHTML'=>$inputsHTML, 'inputs'=>$inputs,'AWSAccessKeyId'=>config('filesystems.disks.s3.key'),'bucket'=>config('filesystems.disks.s3.bucket')];
+}
+
 }

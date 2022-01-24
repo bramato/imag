@@ -5,9 +5,9 @@ namespace bramato\imag\models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class media extends Model
+class imag_media extends Model
 {
-    protected $table = 'media';
+    protected $table = 'imag_media';
 
     public function scopeUserId($query, $IdUser)
     {
